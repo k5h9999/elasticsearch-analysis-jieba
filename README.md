@@ -1,12 +1,9 @@
 基于 [jieba](https://github.com/fxsjy/jieba) 的 [elasticsearch](https://www.elastic.co/products/elasticsearch) 中文分词插件。
 
-集成到ElasticSearch
-=======
+感谢：
+https://github.com/huaban/elasticsearch-analysis-jieba
 
-```bash
-git clone git@github.com:hongfuli/elasticsearch-analysis-jieba.git
-cd elasticsearch-analysis-jieba
-mvn package
+
 ```
 把release/elasticsearch-analysis-jieba-{version}.zip文件解压到 elasticsearch 的 plugins 目录下，重启elasticsearch即可。
 
@@ -38,38 +35,12 @@ Tokenizer t = new Tokenizer();
 t.cut("这是一个伸手不见五指的黑夜。我叫孙悟空，我爱北京，我爱Python和C++。", false, true);
 ```
 
-集成到Lucene
-=======
 
-```java
-import com.github.hongfuli.jieba.lucene.JiebaAnalyzer;
 
-Analyzer analyzer = new JiebaAnalyzer();
-try(TokenStream ts = analyzer.tokenStream("field", "这是一个伸手不见五指的黑夜。我叫孙悟空，我爱北京，我爱Python和C++。")) {
-      StringBuilder b = new StringBuilder();
-      CharTermAttribute termAtt = ts.getAttribute(CharTermAttribute.class);
-      PositionIncrementAttribute posIncAtt = ts.getAttribute(PositionIncrementAttribute.class);
-      PositionLengthAttribute posLengthAtt = ts.getAttribute(PositionLengthAttribute.class);
-      OffsetAttribute offsetAtt = ts.getAttribute(OffsetAttribute.class);
-      assertNotNull(offsetAtt);
-      ts.reset();
-      int pos = -1;
-      while (ts.incrementToken()) {
-        pos += posIncAtt.getPositionIncrement();
-        b.append(termAtt);
-        b.append(" at pos=");
-        b.append(pos);
-        if (posLengthAtt != null) {
-          b.append(" to pos=");
-          b.append(pos + posLengthAtt.getPositionLength());
-        }
-        b.append(" offsets=");
-        b.append(offsetAtt.startOffset());
-        b.append('-');
-        b.append(offsetAtt.endOffset());
-        b.append('\n');
-      }
-      ts.end();
-      return b.toString();
-    }
+```
+本插件包括 jieba analyzer、jieba tokenizer、jieba token filter，有三种模式供选择。
+
+index 主要用于索引分词，分词粒度较细
+search 主要用于查询分词，分词粒度较粗
+other 全角转半角、大写转小写、字符分词
 ```
