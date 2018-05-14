@@ -1,6 +1,7 @@
 基于 [jieba](https://github.com/fxsjy/jieba) 的 [elasticsearch](https://www.elastic.co/products/elasticsearch) 中文分词插件。
 
-感谢：https://github.com/huaban/elasticsearch-analysis-jieba的作者
+感谢：
+https://github.com/huaban/elasticsearch-analysis-jieba 的作者
 
 结巴分词 ElasticSearch 插件
 ===========================
@@ -20,7 +21,9 @@
 ----
 
 
-> 本版本为es5.5.3，如果需要修改，可直接修改对应的pom.xml版本的es版本号就可以了，通用支持es 5X版本号，具体安装参考https://github.com/huaban/elasticsearch-analysis-jieba，另外不明白可以参考es-ik的安装版本
+> 本版本为es5.5.3，如果需要修改，可直接修改对应的pom.xml版本的es版本号就可以了，通用支持es 5X版本号，具体安装参考
+https://github.com/huaban/elasticsearch-analysis-jieba
+另外不明白可以参考es-ik的安装版本
 
 
 
